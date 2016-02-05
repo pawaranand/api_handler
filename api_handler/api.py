@@ -28,9 +28,9 @@ def handle():
 
 	elif len(parts) == 3:
 		api_name = parts[0]
-		version = parts[1]
+		api_path = frappe.get_hooks("api_path", app_name="api_handler")[0]
 		method_name = parts[2]
-		method = '.'.join(map(str,[api_name,"versions",version,method_name]))
+		method = '.'.join(map(str,[api_path,method_name]))
 		frappe.local.form_dict.cmd = method
 		return handler.handle()
 	else:
